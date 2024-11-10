@@ -5,7 +5,7 @@
 ## Установка
 
 1. Клонирование репозитория
-   [GitHub]()
+   [GitHub](git@github.com:ivira161/10.1.git)
 2. Установика зависимостей
    `poetry install`
 

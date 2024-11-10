@@ -4,14 +4,13 @@ version = "0.1.0"
 description = ""
 authors = ["Your Name <you@example.com>"]
 readme = "README.md"
+packages = [{ include = "src" }]
 
 [tool.poetry.dependencies]
 python = "^3.12"
 
-
 [tool.poetry.group.link.dependencies]
 flake8 = "^7.1.1"
-
 
 [tool.poetry.group.lint.dependencies]
 mypy = "^1.13.0"
@@ -29,25 +28,21 @@ warn_return_any = true
 exclude = 'venv'
 
 [tool.black]
-# Максимальная длина строки
 line-length = 119
-# Файлы, которые не нужно форматировать
 exclude = '''
 (
   /(
-      \.eggs         # Исключить несколько общих каталогов
-    | \.git          # в корне проекта
+      \.eggs
+    | \.git
     | \.hg
     | \.mypy_cache
     | \.tox
     | \.venv
     | dist
   )/
-  | foo.py           # Также отдельно исключить файл с именем foo.py
-                     # в корне проекта
+  | foo.py
 )
 '''
 
 [tool.isort]
-# максимальная длина строки
 line_length = 119
