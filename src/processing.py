@@ -1,4 +1,6 @@
-from typing import Dict, List, Any
+from datetime import datetime
+from typing import List, Dict, Any
+
 
 
 def filter_by_state(dict_user: List[Dict[str, str]], state: str = 'EXECUTED') -> List[Dict[str, str]]:
@@ -7,11 +9,13 @@ def filter_by_state(dict_user: List[Dict[str, str]], state: str = 'EXECUTED') ->
     (по умолчанию 'EXECUTED'). Функция возвращает новый список словарей, содержащий только те словари,
     у которых ключ state соответствует указанному значению.
     '''
-
+    if not dict_user:  # Проверка на пустой список
+        return []  # Возвращаем пустой список, если список пуст
     # Изменено: теперь используем переданный параметр state
     filtered_list = [user for user in dict_user if user.get('state') == state]
 
     return filtered_list
+
 
 
 def sort_by_date(data: List[Dict[str, Any]], order: str = 'desc') -> List[Dict[str, Any]]:
@@ -20,12 +24,15 @@ def sort_by_date(data: List[Dict[str, Any]], order: str = 'desc') -> List[Dict[s
     задающий порядок сортировки (по умолчанию — убывание).
     Функция возвращает новый список, отсортированный по дате (date).
     '''
-
-    # Определяем, следует ли сортировать по убыванию или возрастанию
     reverse = (order == 'desc')  # Если order 'desc', то сортировка по убыванию
 
-    # Используем функцию sorted для сортировки данных
-    # Указываем, что нужно сортировать по ключу 'date'
-    sorted_data = sorted(data, key=lambda x: x['date'], reverse=reverse)
+    # Проверка формата даты
+    for item in data:
+        try:
+            item['date'] = datetime.strptime(item['date'], '%Y-%m-%d')
+        except ValueError:
+            raise ValueError(f"Некорректный формат даты: {item['date']}")
 
+    # Используем функцию sorted для сортировки данных
+    sorted_data = sorted(data, key=lambda x: x['date'], reverse=reverse)
     return sorted_data
