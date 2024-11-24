@@ -28,7 +28,6 @@ def card_number_generator(start, end):
     # Основной цикл генератора
     for number in range(start, end + 1):
         card_number = f"{number:0>16}"  # Форматируем номер карты, добавляя нули спереди
-        formatted_card_number = ' '.join(card_number[i:i + 4] for i in range(0, len(card_number), 4))  # Разбиваем на группы по 4
+        formatted_card_number = ' '.join(card_number[i:i + 4] for i in range(0, len(card_number), 4))
+        # Разбиваем на группы по 4
         yield formatted_card_number  # Генерируем отформатированный номер карты
-
-
