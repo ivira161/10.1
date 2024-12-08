@@ -8,14 +8,19 @@ API_URL = "https://api.apilayer.com/exchangerates_data"
 API_KEY = os.getenv("EXCHANGE_API_KEY")  # Токен доступа из .env
 
 
-def convert_to_rub(amount: float, currency: str) -> float:
+def calculate_and_convert_transaction_amount(transaction: dict) -> float:
     """
-    Конвертирует сумму в указанной валюте в рубли.
+    Рассчитывает сумму транзакции в рублях.
 
-    :param amount: Сумма для конвертации.
-    :param currency: Валюта, в которой указана сумма.
-    :return: Сумма в рублях.
+    :param transaction: Словарь с данными о транзакции.
+    :return: Сумма транзакции в рублях.
     """
+    amount = transaction.get('amount', 0.0)
+    currency = transaction.get('currency', 'RUB')
+
+    if amount < 0:
+        return amount  # Возвращаем отрицательную сумму без конвертации
+
     if currency not in ['USD', 'EUR']:
         return float(amount)  # Если валюта не USD или EUR, возвращаем сумму без изменений
 
@@ -34,5 +39,6 @@ def convert_to_rub(amount: float, currency: str) -> float:
 
 
 # Пример вызова функции
-result = convert_to_rub(20.00, 'USD')
+transaction = {'amount': 20.00, 'currency': 'USD'}
+result = calculate_and_convert_transaction_amount(transaction)
 print(f"Конвертированная сумма: {result}")
