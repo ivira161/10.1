@@ -1,6 +1,0 @@
-INFO:root:Starting 'my_function' with args: (1, 2) and kwargs: {}
-INFO:root:'my_function' ok, result: 3
-INFO:root:Starting 'my_function' with args: (1, 2) and kwargs: {}
-INFO:root:'my_function' ok, result: 3
-Starting 'my_function' with args: (1, 2) and kwargs: {}
-'my_function' ok, result: 3
