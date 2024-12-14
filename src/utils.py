@@ -1,6 +1,9 @@
 import json
 import logging
 import os
+import csv
+import pandas as pd
+
 
 # Создаем папку logs, если она не существует
 if not os.path.exists('logs'):
@@ -55,3 +58,59 @@ def read_transactions_from_json(file_path: str):
 file_path = 'operations.json'  # Относительный путь к файлу
 transactions = read_transactions_from_json(file_path)
 print(transactions)
+
+
+def read_transactions_from_csv(file_path: str):
+    transactions = []
+
+    # Увеличиваем лимит для полей
+    csv.field_size_limit(1000000)  # Установите лимит на 1 миллион символов
+
+    # Добавлено: Проверка существования файла перед открытием
+    if not os.path.exists(file_path):
+        logger.error(f"Файл не найден: {file_path}")
+        return []
+
+    with open(file_path, mode='r', newline='', encoding='utf-8') as file:
+        reader = csv.DictReader(file)
+        for row in reader:
+            transactions.append(row)
+    return transactions
+
+# Пример использования функции
+file_path = '/home/ira/10.1/data/transactions.csv'
+transactions = read_transactions_from_csv(file_path)
+print(transactions)
+
+
+def read_transactions_from_excel(file_path: str):
+    """
+    Читает финансовые операции из Excel-файла.
+
+    :param file_path: Путь к Excel-файлу.
+    :return: Список словарей с транзакциями.
+    """
+    # Добавлено: Проверка существования файла перед открытием
+    if not os.path.exists(file_path):
+        logger.error(f"Файл не найден: {file_path}")
+        return []
+
+    try:
+        # Читаем Excel файл
+        df = pd.read_excel(file_path, engine='openpyxl')  # Указываем движок для чтения
+        # Преобразуем DataFrame в список словарей
+        transactions = df.to_dict(orient='records')
+        return transactions
+    except ValueError as e:
+        print(f"Ошибка при чтении файла Excel: {e}")
+        return []
+    except Exception as e:
+        print(f"Произошла ошибка: {e}")
+        return []
+
+
+# Пример использования функции
+file_path = '/home/ira/10.1/data/transactions_excel.xlsx'
+transactions = read_transactions_from_excel(file_path)
+print(transactions)
+
