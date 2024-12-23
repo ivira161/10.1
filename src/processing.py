@@ -1,6 +1,5 @@
 from datetime import datetime
-from typing import List, Dict, Any
-
+from typing import Any, Dict, List
 
 
 def filter_by_state(dict_user: List[Dict[str, str]], state: str = 'EXECUTED') -> List[Dict[str, str]]:
@@ -15,7 +14,6 @@ def filter_by_state(dict_user: List[Dict[str, str]], state: str = 'EXECUTED') ->
     filtered_list = [user for user in dict_user if user.get('state') == state]
 
     return filtered_list
-
 
 
 def sort_by_date(data: List[Dict[str, Any]], order: str = 'desc') -> List[Dict[str, Any]]:
