@@ -1,6 +1,7 @@
 import pytest
 from src.widget import mask_account_card, get_date
 
+
 @pytest.mark.parametrize(
     "input_string, expected",
     [
@@ -14,12 +15,18 @@ from src.widget import mask_account_card, get_date
 def test_mask_account_card(input_string, expected):
     assert mask_account_card(input_string) == expected
 
+
 @pytest.mark.parametrize(
     "input_date, expected",
     [
         ("2024-03-11T02:26:18.671407", "11.03.2024"),
-        ("2024-03", "03.2024"),  # Проверка не полного формата
+        ("2024-03", "Ошибка: Неполный формат даты."),  # Проверка неполного формата
+        ("2024-03-11T00:00:00", "11.03.2024"),  # Полный формат
     ]
 )
 def test_get_date(input_date, expected):
-    assert get_date(input_date) == expected
+    if "Ошибка" in expected:
+        with pytest.raises(ValueError, match=expected):
+            get_date(input_date)
+    else:
+        assert get_date(input_date) == expected
