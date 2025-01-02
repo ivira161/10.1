@@ -59,7 +59,6 @@ id;state;date;amount;currency_name;currency_code;from;to;description
 2833087;EXECUTED;2022-09-02T21:13:15Z;28421;Hryvnia;UAH;Счет 93938816885471635309;Счет 27679999248091965215;Перевод со счета на счет
 3211835;CANCELED;2020-07-03T13:56:11Z;30035;Rial;QAR;Visa 8001999082783412;Mastercard 0430116126947445;Перевод с карты на карту
 2627887;CANCELED;2020-01-03T17:08:51Z;18001;Yuan Renminbi;CNY;Mastercard 8757974222871146;Discover 7955094807047223;Перевод с карты на карту
-;;;;;;;;
 632926;PENDING;2021-11-27T00:46:09Z;29553;Yuan Renminbi;CNY;American Express 6477627838877562;Счет 88381741644903346269;Перевод организации
 1539387;EXECUTED;2023-07-29T18:13:23Z;13130;Real;BRL;American Express 9646246622784373;American Express 2760544280145973;Перевод с карты на карту
 2919081;EXECUTED;2021-12-23T06:40:02Z;23726;Rupiah;IDR;Mastercard 6966877136646759;Mastercard 7149835655551156;Перевод с карты на карту
